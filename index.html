@@ -1,0 +1,695 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="author" content="Khayyam Almas">
+<meta name="description" content="Khayyam Almas — Senior QA Automation & AI-Driven Test Tools Engineer. Playwright, Selenium, ISTQB test design and AI tooling for enterprise e-government platforms.">
+<meta name="robots" content="index, follow">
+
+<meta property="og:type" content="profile">
+<meta property="og:title" content="Khayyam Almas — Senior QA Automation & AI-Driven Test Tools Engineer">
+<meta property="og:description" content="I test enterprise tax and e-government platforms — and I build the AI tooling that runs the quality cycle itself.">
+<meta property="og:locale" content="en">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Khayyam Almas — Senior QA Automation & AI-Driven Test Tools Engineer">
+<meta name="twitter:description" content="I test enterprise tax and e-government platforms — and I build the AI tooling that runs the quality cycle itself.">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2316639F'/%3E%3Cpath d='M9 16.5l4.6 4.6L23 11.4' stroke='white' stroke-width='3.2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+
+<style>
+  :root{
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  img{ max-width:100%; }
+  [hidden]{ display:none !important; }
+</style>
+
+<title>Khayyam Almas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    --ground:#F5F7F9;
+    --surface:#FFFFFF;
+    --surface-2:#EDF1F5;
+    --ink:#132132;
+    --ink-2:#37485C;
+    --muted:#65788C;
+    --line:#D9E1EA;
+    --line-soft:#E7ECF2;
+    --accent:#16639F;
+    --accent-soft:#E3EFF9;
+    --verify:#227F63;
+    --verify-soft:#DDF0E8;
+    --warn:#9A6210;
+    --warn-soft:#F7EBD8;
+
+    --display:"Archivo", "Segoe UI", system-ui, sans-serif;
+    --body:"Public Sans", "Segoe UI", system-ui, sans-serif;
+    --mono:"IBM Plex Mono", ui-monospace, "Cascadia Mono", monospace;
+
+    color-scheme:light;
+  }
+
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ground:#0D1420;
+      --surface:#141E2C;
+      --surface-2:#1B2735;
+      --ink:#E8EEF6;
+      --ink-2:#C2CEDC;
+      --muted:#8CA0B5;
+      --line:#24313F;
+      --line-soft:#1D2937;
+      --accent:#5BA9E8;
+      --accent-soft:#16283A;
+      --verify:#57C6A0;
+      --verify-soft:#132B25;
+      --warn:#D9A24A;
+      --warn-soft:#2C2313;
+      color-scheme:dark;
+    }
+  }
+
+  :root[data-theme="dark"]{
+    --ground:#0D1420;
+    --surface:#141E2C;
+    --surface-2:#1B2735;
+    --ink:#E8EEF6;
+    --ink-2:#C2CEDC;
+    --muted:#8CA0B5;
+    --line:#24313F;
+    --line-soft:#1D2937;
+    --accent:#5BA9E8;
+    --accent-soft:#16283A;
+    --verify:#57C6A0;
+    --verify-soft:#132B25;
+    --warn:#D9A24A;
+    --warn-soft:#2C2313;
+    color-scheme:dark;
+  }
+
+  *{ box-sizing:border-box; }
+
+  body{
+    margin:0;
+    background:var(--ground);
+    color:var(--ink);
+    font-family:var(--body);
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .wrap{
+    max-width:980px;
+    margin:0 auto;
+    padding-inline:20px;
+    padding-block:0;
+  }
+
+  a{ color:var(--accent); }
+  a:focus-visible, .node:focus-visible{
+    outline:2px solid var(--accent);
+    outline-offset:3px;
+    border-radius:3px;
+  }
+
+  h1,h2,h3{ font-family:var(--display); text-wrap:balance; margin:0; letter-spacing:-0.015em; }
+
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:11px;
+    font-weight:500;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--muted);
+  }
+
+  /* ============ HERO ============ */
+  .hero{
+    border-bottom:1px solid var(--line);
+    background:var(--surface);
+    padding-block:52px 40px;
+  }
+  .hero h1{
+    font-size:clamp(38px, 7vw, 62px);
+    font-weight:700;
+    line-height:1.02;
+    margin-bottom:12px;
+  }
+  .hero .role{
+    font-family:var(--mono);
+    font-size:clamp(12px, 2.2vw, 14px);
+    letter-spacing:.06em;
+    color:var(--accent);
+    font-weight:500;
+    margin-bottom:20px;
+  }
+  .hero .thesis{
+    font-size:clamp(17px, 2.4vw, 20px);
+    color:var(--ink-2);
+    max-width:62ch;
+    line-height:1.55;
+    margin:0 0 28px;
+  }
+  .hero .thesis b{ color:var(--ink); font-weight:600; }
+
+  .chips{ display:flex; flex-wrap:wrap; gap:8px; list-style:none; margin:0; padding:0; }
+  .chip{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    font-family:var(--mono);
+    font-size:12.5px;
+    padding:6px 11px;
+    border:1px solid var(--line);
+    border-radius:999px;
+    background:var(--ground);
+    color:var(--ink-2);
+    text-decoration:none;
+  }
+  a.chip:hover{ border-color:var(--accent); color:var(--accent); }
+  .chip .k{ color:var(--muted); }
+
+  /* ============ PIPELINE ============ */
+  .pipeline{ padding-block:40px 8px; }
+  .pipe-head{ display:flex; align-items:baseline; gap:12px; flex-wrap:wrap; margin-bottom:18px; }
+  .pipe-head p{ margin:0; color:var(--muted); font-size:14px; }
+
+  .flow{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:10px;
+  }
+  .node{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:4px;
+    padding:14px 14px 15px;
+    position:relative;
+    display:block;
+    text-decoration:none;
+    color:inherit;
+    min-width:0;
+  }
+  .node::after{
+    content:"→";
+    position:absolute;
+    right:-12px;
+    top:50%;
+    transform:translateY(-50%);
+    color:var(--muted);
+    font-size:14px;
+    z-index:1;
+  }
+  .node:last-child::after{ content:none; }
+  .node .num{
+    font-family:var(--mono);
+    font-size:11px;
+    color:var(--accent);
+    letter-spacing:.1em;
+    display:block;
+    margin-bottom:6px;
+  }
+  .node .nm{ font-family:var(--display); font-weight:600; font-size:15px; display:block; margin-bottom:4px; }
+  .node .ds{ font-size:12.5px; color:var(--muted); line-height:1.45; }
+
+  /* ============ SECTIONS ============ */
+  section{ padding-block:44px; }
+  .sec-head{ margin-bottom:22px; }
+  .sec-head h2{
+    font-size:clamp(22px, 3.4vw, 28px);
+    font-weight:700;
+    margin:6px 0 8px;
+  }
+  .sec-head p{ margin:0; color:var(--muted); max-width:60ch; font-size:15px; }
+
+  .rule{ border:0; border-top:1px solid var(--line-soft); margin:0; }
+
+  /* ============ TOOL CARDS ============ */
+  .tools{ display:grid; grid-template-columns:repeat(3, 1fr); gap:14px; }
+  .tool{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-top:3px solid var(--accent);
+    border-radius:4px;
+    padding:20px 18px 18px;
+    display:flex;
+    flex-direction:column;
+    min-width:0;
+  }
+  .tool h3{
+    font-family:var(--mono);
+    font-size:14px;
+    font-weight:500;
+    letter-spacing:0;
+    color:var(--ink);
+    margin-bottom:10px;
+  }
+  .tool h3 span{ color:var(--muted); }
+  .tool p{ margin:0 0 14px; font-size:14.5px; color:var(--ink-2); line-height:1.55; }
+  .tool .meta{ margin-top:auto; padding-top:12px; border-top:1px solid var(--line-soft); }
+  .meta-row{ display:flex; gap:8px; font-size:12.5px; line-height:1.5; margin-bottom:6px; }
+  .meta-row:last-child{ margin-bottom:0; }
+  .meta-row .lbl{
+    font-family:var(--mono);
+    font-size:10.5px;
+    letter-spacing:.09em;
+    text-transform:uppercase;
+    color:var(--muted);
+    flex:0 0 62px;
+    padding-top:2px;
+  }
+  .meta-row .val{ color:var(--ink-2); flex:1; min-width:0; overflow-wrap:anywhere; }
+
+  .tag{
+    display:inline-block;
+    font-family:var(--mono);
+    font-size:11px;
+    padding:2px 7px;
+    border-radius:3px;
+    background:var(--verify-soft);
+    color:var(--verify);
+    white-space:normal;
+    line-height:1.5;
+  }
+  .tag.warn{ background:var(--warn-soft); color:var(--warn); }
+
+  /* ============ FIELD NOTES ============ */
+  .notes{ display:grid; gap:0; border-top:1px solid var(--line); }
+  .note{
+    display:grid;
+    grid-template-columns:minmax(190px, 260px) 1fr;
+    gap:18px;
+    padding:15px 0;
+    border-bottom:1px solid var(--line-soft);
+  }
+  .note dt{
+    font-family:var(--mono);
+    font-size:13px;
+    color:var(--ink);
+    font-weight:500;
+    line-height:1.45;
+  }
+  .note dd{ margin:0; font-size:14.5px; color:var(--ink-2); line-height:1.55; }
+
+  /* ============ STACK ============ */
+  .stack{ display:grid; grid-template-columns:repeat(2, 1fr); gap:18px 28px; }
+  .stack-grp{ min-width:0; }
+  .stack-grp h3{
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--accent);
+    font-weight:500;
+    margin-bottom:9px;
+    padding-bottom:7px;
+    border-bottom:1px solid var(--line);
+  }
+  .stack-grp ul{ list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; gap:6px; }
+  .stack-grp li{
+    font-size:13px;
+    padding:4px 9px;
+    border-radius:3px;
+    background:var(--surface-2);
+    color:var(--ink-2);
+  }
+  .stack-grp.lead li{ background:var(--accent-soft); color:var(--accent); font-weight:500; }
+
+  /* ============ TIMELINE ============ */
+  .roles{ display:grid; gap:0; }
+  .role-item{
+    display:grid;
+    grid-template-columns:200px 1fr;
+    gap:20px;
+    padding:18px 0;
+    border-top:1px solid var(--line-soft);
+  }
+  .role-item:first-child{ border-top:1px solid var(--line); }
+  .role-when{ font-family:var(--mono); font-size:12.5px; color:var(--muted); padding-top:3px; }
+  .role-what{ min-width:0; }
+  .role-what h3{ font-size:17px; font-weight:600; margin-bottom:3px; }
+  .role-what .co{ font-size:13.5px; color:var(--accent); font-family:var(--mono); margin-bottom:8px; }
+  .role-what p{ margin:0; font-size:14.5px; color:var(--ink-2); line-height:1.55; max-width:62ch; }
+
+  /* ============ CREDS ============ */
+  .creds{ display:grid; grid-template-columns:repeat(2,1fr); gap:14px; }
+  .cred{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:4px;
+    padding:16px 16px 15px;
+  }
+  .cred h3{ font-size:15px; font-weight:600; margin-bottom:3px; }
+  .cred .sub{ font-size:13.5px; color:var(--muted); line-height:1.45; }
+  .cred .yr{ font-family:var(--mono); font-size:12px; color:var(--muted); margin-top:5px; display:block; }
+
+  /* ============ FOOTER ============ */
+  footer{
+    border-top:1px solid var(--line);
+    background:var(--surface);
+    padding-block:38px 44px;
+    margin-top:12px;
+  }
+  footer h2{ font-size:clamp(20px,3vw,26px); font-weight:700; margin-bottom:10px; }
+  footer p{ margin:0 0 20px; color:var(--muted); max-width:52ch; font-size:15px; }
+  .foot-note{
+    margin-top:26px;
+    font-family:var(--mono);
+    font-size:11.5px;
+    color:var(--muted);
+  }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 860px){
+    .tools{ grid-template-columns:1fr; }
+    .flow{ grid-template-columns:repeat(2,1fr); }
+    .node:nth-child(2)::after{ content:none; }
+  }
+  @media (max-width: 620px){
+    .flow{ grid-template-columns:1fr; }
+    .node::after{
+      content:"↓";
+      right:auto;
+      left:18px;
+      top:auto;
+      bottom:-13px;
+      transform:none;
+    }
+    .note{ grid-template-columns:1fr; gap:5px; }
+    .stack{ grid-template-columns:1fr; }
+    .role-item{ grid-template-columns:1fr; gap:6px; }
+    .creds{ grid-template-columns:1fr; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ transition:none !important; animation:none !important; }
+  }
+</style>
+
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <h1>Khayyam Almas</h1>
+    <div class="role">Senior QA Automation &amp; AI-Driven Test Tools Engineer</div>
+    <p class="thesis">I test enterprise tax and e-government platforms — and I build the
+      <b>AI tooling that runs the quality cycle itself</b>: from the requirement document, to the
+      test case set, to the automated suite, to the defect report.</p>
+    <ul class="chips">
+      <li><a class="chip" href="mailto:khayyam.a.a@gmail.com"><span class="k">email</span> khayyam.a.a@gmail.com</a></li>
+      <li><a class="chip" href="https://linkedin.com/in/khayyamalmas" target="_blank" rel="noopener"><span class="k">linkedin</span> /in/khayyamalmas</a></li>
+      <li><a class="chip" href="tel:+994502541077"><span class="k">call</span> +994 50 254 10 77</a></li>
+      <li><a class="chip" href="https://wa.me/905518126881" target="_blank" rel="noopener"><span class="k">whatsapp</span> +90 5518126881</a></li>
+      <li><span class="chip"><span class="k">based in</span> Baku, Azerbaijan</span></li>
+    </ul>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- ============ PIPELINE ============ -->
+  <div class="pipeline">
+    <div class="pipe-head">
+      <span class="eyebrow">The cycle I automated</span>
+    </div>
+    <div class="flow">
+      <div class="node">
+        <span class="num">01</span>
+        <span class="nm">Specification</span>
+        <span class="ds">Business analysis document behind a delivery task</span>
+      </div>
+      <div class="node">
+        <span class="num">02</span>
+        <span class="nm">Test cases</span>
+        <span class="ds">ISTQB-designed set, imported with traceability</span>
+      </div>
+      <div class="node">
+        <span class="num">03</span>
+        <span class="nm">Automation</span>
+        <span class="ds">Playwright suite, Page Object Model, Allure</span>
+      </div>
+      <div class="node">
+        <span class="num">04</span>
+        <span class="nm">Defects</span>
+        <span class="ds">Assigned tickets carrying evidence and links</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ TOOLS ============ -->
+  <section>
+    <div class="sec-head">
+      <span class="eyebrow">Built in 2026</span>
+      <h2>Three tools that close the loop</h2>
+      <p>Each one takes a single task identifier as its only input and does the rest — reading the
+        systems the team already works in, and writing back to them.</p>
+    </div>
+
+    <div class="tools">
+
+      <article class="tool">
+        <h3>Specification <span>→</span> Test cases</h3>
+        <p>Reads the requirement document behind a task, builds a numbered requirement inventory,
+          then applies ISTQB design techniques — equivalence partitioning, boundary values, decision
+          tables, state transition, role-permission matrices — to produce the full case set. It then
+          creates the folder, imports every case, links each one back to its task and assigns the
+          owner from the task's assignee.</p>
+        <div class="meta">
+          <div class="meta-row"><span class="lbl">Outputs</span><span class="val">Import file · review workbook · RTM</span></div>
+          <div class="meta-row"><span class="lbl">Reads</span><span class="val">Task tracker · knowledge base · test management</span></div>
+          <div class="meta-row"><span class="lbl">Guard</span><span class="val"><span class="tag">Writes only on approval</span></span></div>
+        </div>
+      </article>
+
+      <article class="tool">
+        <h3>Test cases <span>→</span> Automation</h3>
+        <p>Turns approved manual cases into Playwright and TypeScript: groups them by screen, plans
+          the Page Objects, resolves real selectors from the frontend source or a recorded codegen
+          session rather than inventing them, and emits page classes plus spec files wired to Allure
+          reporting.</p>
+        <div class="meta">
+          <div class="meta-row"><span class="lbl">Outputs</span><span class="val">Page Object classes · tagged spec files · Allure integration</span></div>
+          <div class="meta-row"><span class="lbl">Stack</span><span class="val">Playwright · TypeScript · Page Object Model</span></div>
+          <div class="meta-row"><span class="lbl">Gate</span><span class="val"><span class="tag">Type-check clean · spec count = case count</span></span></div>
+        </div>
+      </article>
+
+      <article class="tool">
+        <h3>Failures <span>→</span> Defects</h3>
+        <p>Reads execution results and, for failed cases only, opens a defect under the parent task:
+          routed to the responsible frontend or backend developer, carrying a recorded browser
+          session as evidence, and linked both to the exact specification section and back to the
+          case that failed.</p>
+        <div class="meta">
+          <div class="meta-row"><span class="lbl">Outputs</span><span class="val">Assigned defect with evidence, specification anchor and case link</span></div>
+          <div class="meta-row"><span class="lbl">Evidence</span><span class="val">Recorded session — video plus network, console and error logs</span></div>
+          <div class="meta-row"><span class="lbl">Rule</span><span class="val"><span class="tag warn">Evidence environment overrides the case</span></span></div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- ============ FIELD NOTES ============ -->
+  <section>
+    <div class="sec-head">
+      <span class="eyebrow">Field notes</span>
+      <h2>What the documentation doesn't tell you</h2>
+      <p>Integration rules found by piloting against a real Data Center instance, then written into
+        the tooling so nobody has to rediscover them.</p>
+    </div>
+
+    <dl class="notes">
+      <div class="note">
+        <dt>Owner is a user key, not a username</dt>
+        <dd>The test management REST API rejects a username for the owner field. Assignment only
+          succeeds with the internal user key, read from the task's assignee first.</dd>
+      </div>
+      <div class="note">
+        <dt>Step fields render as HTML</dt>
+        <dd>Newlines collapse on screen, so numbered steps have to live in one step cell joined by
+          explicit break tags — otherwise a ten-step case reads as one unbroken paragraph.</dd>
+      </div>
+      <div class="note">
+        <dt>Estimates are milliseconds</dt>
+        <dd>A fifteen-minute case is 900000. Anything that looks like a clock value is silently
+          wrong.</dd>
+      </div>
+      <div class="note">
+        <dt>Priority vocabularies differ per project</dt>
+        <dd>"Medium" simply does not exist in some projects. One pilot case validates the real
+          vocabulary before a bulk import fails halfway through.</dd>
+      </div>
+      <div class="note">
+        <dt>Import files must be UTF-8 without BOM</dt>
+        <dd>A byte-order mark breaks the very first column header, and Azerbaijani characters
+          corrupt on the way in.</dd>
+      </div>
+    </dl>
+  </section>
+
+  <hr class="rule">
+
+  <!-- ============ STACK ============ -->
+  <section>
+    <div class="sec-head">
+      <span class="eyebrow">Toolkit</span>
+      <h2>Stack</h2>
+    </div>
+
+    <div class="stack">
+      <div class="stack-grp lead">
+        <h3>AI-driven QA tooling</h3>
+        <ul>
+          <li>LLM-assisted test generation</li>
+          <li>AI agent workflows</li>
+          <li>Model Context Protocol</li>
+          <li>Prompt engineering for test design</li>
+        </ul>
+      </div>
+      <div class="stack-grp lead">
+        <h3>UI test automation</h3>
+        <ul>
+          <li>Playwright</li>
+          <li>Selenium WebDriver</li>
+          <li>Page Object Model</li>
+          <li>Cucumber (BDD)</li>
+          <li>JUnit</li>
+          <li>TestNG</li>
+        </ul>
+      </div>
+      <div class="stack-grp">
+        <h3>Test design &amp; management</h3>
+        <ul>
+          <li>ISTQB techniques</li>
+          <li>Zephyr Scale</li>
+          <li>Jira</li>
+          <li>Confluence</li>
+          <li>RTM</li>
+        </ul>
+      </div>
+      <div class="stack-grp">
+        <h3>CI/CD &amp; reporting</h3>
+        <ul>
+          <li>GitLab CI/CD</li>
+          <li>Git</li>
+          <li>Allure Report</li>
+        </ul>
+      </div>
+      <div class="stack-grp">
+        <h3>Programming</h3>
+        <ul>
+          <li>Java</li>
+          <li>TypeScript</li>
+          <li>Node.js</li>
+        </ul>
+      </div>
+      <div class="stack-grp">
+        <h3>API</h3>
+        <ul>
+          <li>REST Assured</li>
+          <li>Postman</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- ============ EXPERIENCE ============ -->
+  <section>
+    <div class="sec-head">
+      <span class="eyebrow">Track record</span>
+      <h2>Experience</h2>
+    </div>
+
+    <div class="roles">
+      <div class="role-item">
+        <div class="role-when">Jan 2026 — Present</div>
+        <div class="role-what">
+          <h3>Senior Software AQA Engineer</h3>
+          <div class="co">Cybernet LLC</div>
+          <p>Built and shipped the three tools above, then rolled them out to the whole QA team as
+            versioned internal plugins under protected-branch and code-owner approval governance.
+            Extended UI regression into Playwright and TypeScript alongside the existing Java suite,
+            defined test plans and strategy, and mentored engineers on automation and code review.</p>
+        </div>
+      </div>
+      <div class="role-item">
+        <div class="role-when">Feb 2023 — Jan 2026</div>
+        <div class="role-what">
+          <h3>Middle Software AQA Engineer</h3>
+          <div class="co">Cybernet LLC</div>
+          <p>Developed the UI automation framework on Selenium, Java, Cucumber and JUnit, and wired
+            it into GitLab CI/CD for continuous execution with Allure reporting distributed daily.</p>
+        </div>
+      </div>
+      <div class="role-item">
+        <div class="role-when">Aug 2021 — Feb 2023</div>
+        <div class="role-what">
+          <h3>Middle Software AQA Engineer</h3>
+          <div class="co">Rainpark Solutions</div>
+          <p>Built a BDD framework from scratch with the Page Object Model for scalable UI
+            automation, and covered the backend with REST Assured and Postman.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- ============ CREDENTIALS ============ -->
+  <section>
+    <div class="sec-head">
+      <span class="eyebrow">Credentials</span>
+      <h2>Certification &amp; education</h2>
+    </div>
+    <div class="creds">
+      <div class="cred">
+        <h3>ISTQB Certified Tester — Foundation Level</h3>
+        <div class="sub">International Software Testing Qualifications Board</div>
+      </div>
+      <div class="cred">
+        <h3>AI Test Tools</h3>
+        <div class="sub">IATELS</div>
+      </div>
+      <div class="cred">
+        <h3>Full Stack Automation Engineer</h3>
+        <div class="sub">TechPro Education</div>
+      </div>
+      <div class="cred">
+        <h3>Bachelor of Civil Engineering</h3>
+        <div class="sub">Azerbaijan University of Architecture and Construction</div>
+        <span class="yr">2006 — 2010</span>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    <h2>Open to conversations</h2>
+    <p>About test automation, AI-assisted quality engineering, or building QA tooling a whole team
+      can actually use.</p>
+    <ul class="chips">
+      <li><a class="chip" href="mailto:khayyam.a.a@gmail.com"><span class="k">email</span> khayyam.a.a@gmail.com</a></li>
+      <li><a class="chip" href="https://linkedin.com/in/khayyamalmas" target="_blank" rel="noopener"><span class="k">linkedin</span> /in/khayyamalmas</a></li>
+      <li><a class="chip" href="tel:+994502541077"><span class="k">call</span> +994 50 254 10 77</a></li>
+      <li><a class="chip" href="https://wa.me/905518126881" target="_blank" rel="noopener"><span class="k">whatsapp</span> +90 5518126881</a></li>
+    </ul>
+    <div class="foot-note">Baku, Azerbaijan · Azerbaijani (native) · English (intermediate) · Russian (intermediate)</div>
+  </div>
+</footer>
+
+</body>
+</html>
