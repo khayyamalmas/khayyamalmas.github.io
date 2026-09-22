@@ -135,6 +135,80 @@
     background:var(--surface);
     padding-block:52px 40px;
   }
+  .hero-top{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:16px 20px;
+    flex-wrap:wrap;
+  }
+  .hero-id{ min-width:0; }
+
+  .hero-actions{ display:flex; align-items:center; gap:16px; flex-wrap:wrap; }
+  .topnav{ display:flex; gap:16px; flex-wrap:wrap; }
+  .topnav a{
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:.04em;
+    color:var(--muted);
+    text-decoration:none;
+    padding-bottom:2px;
+    border-bottom:1px solid transparent;
+  }
+  .topnav a:hover{ color:var(--accent); border-bottom-color:var(--accent); }
+
+  /* hover ipucu -- title-den ferqli olaraq derhal chixir */
+  .tip{ position:relative; }
+  .tip::after{
+    content:attr(data-tip);
+    position:absolute;
+    bottom:calc(100% + 9px);
+    left:50%;
+    transform:translateX(-50%);
+    background:var(--ink);
+    color:var(--surface);
+    font-family:var(--mono);
+    font-size:11px;
+    line-height:1;
+    padding:6px 9px;
+    border-radius:4px;
+    white-space:nowrap;
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .13s ease;
+  }
+  .tip:hover::after,
+  .tip:focus-visible::after{ opacity:1; }
+
+  .pin{ display:inline-flex; margin-right:1px; color:var(--muted); }
+
+  .theme-toggle{
+    flex:0 0 auto;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:38px; height:38px;
+    margin-top:6px;
+    border:1px solid var(--line);
+    border-radius:50%;
+    background:var(--ground);
+    color:var(--ink-2);
+    cursor:pointer;
+    padding:0;
+  }
+  .theme-toggle:hover{ border-color:var(--accent); color:var(--accent); }
+  .theme-toggle:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; }
+  .icon-sun{ display:none; }
+  .icon-moon{ display:block; }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]) .icon-sun{ display:block; }
+    :root:not([data-theme="light"]) .icon-moon{ display:none; }
+  }
+  :root[data-theme="dark"] .icon-sun{ display:block; }
+  :root[data-theme="dark"] .icon-moon{ display:none; }
+  :root[data-theme="light"] .icon-sun{ display:none; }
+  :root[data-theme="light"] .icon-moon{ display:block; }
+
   .hero h1{
     font-size:clamp(38px, 7vw, 62px);
     font-weight:700;
@@ -147,18 +221,42 @@
     letter-spacing:.06em;
     color:var(--accent);
     font-weight:500;
-    margin-bottom:20px;
+    margin-bottom:9px;
+  }
+  .hero .place{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    font-family:var(--mono);
+    font-size:12.5px;
+    color:var(--muted);
   }
   .hero .thesis{
     font-size:clamp(17px, 2.4vw, 20px);
     color:var(--ink-2);
     max-width:62ch;
     line-height:1.55;
-    margin:0 0 28px;
+    margin:24px 0 0;
   }
   .hero .thesis b{ color:var(--ink); font-weight:600; }
 
-  .chips{ display:flex; flex-wrap:wrap; gap:8px; list-style:none; margin:0; padding:0; }
+  .chips{ display:flex; flex-wrap:wrap; gap:8px; list-style:none; margin:0; padding:0; align-items:center; }
+
+  .iconbtn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:38px; height:38px;
+    flex:0 0 auto;
+    border-radius:50%;
+    background:var(--accent-soft);
+    color:var(--accent);
+    border:1px solid transparent;
+    text-decoration:none;
+    padding:0;
+  }
+  .iconbtn:hover{ border-color:var(--accent); }
+  .iconbtn:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; }
   .chip{
     display:inline-flex;
     align-items:center;
@@ -240,6 +338,13 @@
 
   .rule{ border:0; border-top:1px solid var(--line-soft); margin:0; }
 
+  .prose{ max-width:68ch; display:grid; gap:13px; }
+  .prose p{ font-size:15px; line-height:1.62; }
+
+  html{ scroll-behavior:smooth; }
+  @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } }
+  section[id], footer[id]{ scroll-margin-top:22px; }
+
   /* ============ TOOL CARDS ============ */
   .tools{ display:grid; grid-template-columns:repeat(3, 1fr); gap:14px; }
   .tool{
@@ -261,6 +366,16 @@
     margin-bottom:10px;
   }
   .tool h3 span{ color:var(--muted); }
+
+  /* her aletin oz accent rengi: dizayn -> qurma -> defekt */
+  .tool--design{ border-top-color:var(--accent); }
+  .tool--build{ border-top-color:var(--verify); }
+  .tool--defect{ border-top-color:var(--warn); }
+  .tool--design h3 span{ color:var(--accent); }
+  .tool--build h3 span{ color:var(--verify); }
+  .tool--defect h3 span{ color:var(--warn); }
+  .tool--build .meta-row .lbl{ color:var(--verify); }
+  .tool--defect .meta-row .lbl{ color:var(--warn); }
   .tool p{ margin:0 0 14px; font-size:14.5px; color:var(--ink-2); line-height:1.55; }
   .tool .meta{ margin-top:auto; padding-top:12px; border-top:1px solid var(--line-soft); }
   .meta-row{ display:flex; gap:8px; font-size:12.5px; line-height:1.5; margin-bottom:6px; }
@@ -343,9 +458,46 @@
   .role-item:first-child{ border-top:1px solid var(--line); }
   .role-when{ font-family:var(--mono); font-size:12.5px; color:var(--muted); padding-top:3px; }
   .role-what{ min-width:0; }
+  .role-stack{
+    display:flex; flex-wrap:wrap; gap:5px;
+    list-style:none; margin:12px 0 0; padding:0;
+    max-width:46ch;
+  }
+  .role-stack li{
+    font-family:var(--mono);
+    font-size:11px;
+    line-height:1.5;
+    padding:3px 8px;
+    border-radius:3px;
+    background:var(--surface-2);
+    color:var(--muted);
+  }
+
+  /* ---- languages ---- */
+  .langs{ display:grid; gap:13px; max-width:480px; }
+  .lang{ display:flex; align-items:center; gap:14px; border-radius:3px; }
+  .lang:focus-visible{ outline:2px solid var(--accent); outline-offset:4px; }
+  .lang-name{
+    font-family:var(--display);
+    font-weight:600;
+    font-size:15px;
+    flex:0 0 108px;
+  }
+  .meter{ display:inline-flex; gap:4px; flex:0 0 auto; }
+  .meter i{ display:block; width:24px; height:6px; border-radius:2px; background:var(--surface-2); }
+  .meter i.on{ background:var(--accent); }
+  .lang-level{ font-family:var(--mono); font-size:12px; color:var(--muted); }
+  @media (hover: hover){
+    .lang-level{ opacity:0; transition:opacity .15s ease; }
+    .lang:hover .lang-level,
+    .lang:focus .lang-level,
+    .lang:focus-within .lang-level{ opacity:1; }
+  }
+
   .role-what h3{ font-size:17px; font-weight:600; margin-bottom:3px; }
   .role-what .co{ font-size:13.5px; color:var(--accent); font-family:var(--mono); margin-bottom:8px; }
   .role-what p{ margin:0; font-size:14.5px; color:var(--ink-2); line-height:1.55; max-width:62ch; }
+  .role-what p + p{ margin-top:10px; }
 
   /* ============ CREDS ============ */
   .creds{ display:grid; grid-template-columns:repeat(2,1fr); gap:14px; }
@@ -404,24 +556,18 @@
   .dropdown[open] .chev{ transform:rotate(-135deg); margin-top:2px; }
   .menu{
     list-style:none;
-    margin:9px 0 0;
-    padding:6px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin:10px 0 0;
+    padding:9px;
+    width:max-content;
+    max-width:100%;
     background:var(--surface);
     border:1px solid var(--line);
-    border-radius:4px;
-    min-width:200px;
+    border-radius:6px;
     box-shadow:0 8px 24px rgba(19,33,50,.12);
   }
-  .menu a{
-    display:block;
-    padding:9px 12px;
-    border-radius:3px;
-    font-family:var(--mono);
-    font-size:13px;
-    color:var(--ink-2);
-    text-decoration:none;
-  }
-  .menu a:hover{ background:var(--accent-soft); color:var(--accent); }
 
   .foot-note{
     margin-top:26px;
@@ -458,19 +604,53 @@
   }
 </style>
 
+<script>
+  /* Sechilmish temani erken berpa et ki, sehife achilanda reng titremesin. */
+  (function(){
+    try{
+      var t = localStorage.getItem('theme');
+      if (t === 'dark' || t === 'light') document.documentElement.setAttribute('data-theme', t);
+    }catch(e){}
+  })();
+</script>
+
 </head>
 <body>
-
 <header class="hero">
   <div class="wrap">
-    <h1>Khayyam Almas</h1>
-    <div class="role">Senior QA Automation &amp; AI-Driven Test Tools Engineer</div>
-    <p class="thesis">I test enterprise tax and e-government platforms — and I build the
-      <b>AI tooling that runs the quality cycle itself</b>: from the requirement document, to the
-      test case set, to the automated suite, to the defect report.</p>
-    <ul class="chips">
-      <li><span class="chip"><span class="k">based in</span> Baku, Azerbaijan</span></li>
-    </ul>
+    <div class="hero-top">
+      <div class="hero-id">
+        <h1>Khayyam Almas</h1>
+        <div class="role">Senior QA Automation &amp; AI-Driven Test Tools Engineer</div>
+        <div class="place">
+          <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10.3c0 5.4-8 12.2-8 12.2s-8-6.8-8-12.2a8 8 0 0 1 16 0z"/><circle cx="12" cy="10.1" r="2.8"/></svg>
+          Baku, Azerbaijan
+        </div>
+      </div>
+      <div class="hero-actions">
+      <nav class="topnav" aria-label="Page sections">
+        <a href="#contact">Contact</a>
+      </nav>
+      <a class="iconbtn tip" data-tip="Resume (PDF)" href="Khayyam_Almas_CV.pdf"
+         target="_blank" rel="noopener" aria-label="Resume, PDF">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor"
+             stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8.5" y1="13.5" x2="15.5" y2="13.5"/><line x1="8.5" y1="17.5" x2="13" y2="17.5"/></svg>
+      </a>
+      <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch colour theme">
+        <svg class="icon-moon" viewBox="0 0 24 24" width="17" height="17" fill="none"
+             stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"
+             aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" width="17" height="17" fill="none"
+             stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"
+             aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.5 1.5M17.6 17.6l1.5 1.5M19.1 4.9l-1.5 1.5M6.4 17.6l-1.5 1.5"/></svg>
+      </button>
+      </div>
+    </div>
+    <p class="thesis">For five years I have tested systems people cannot opt out of — hospital
+      registration and appointment booking, then enterprise tax and e-government platforms. Now I
+      build the <b>AI tooling that runs the quality cycle itself</b>: from the requirement document,
+      to the test case set, to the automated suite, to the defect report.</p>
   </div>
 </header>
 
@@ -506,7 +686,7 @@
   </div>
 
   <!-- ============ TOOLS ============ -->
-  <section>
+  <section id="work">
     <div class="sec-head">
       <span class="eyebrow">Built in 2026</span>
       <h2>Three tools that close the loop</h2>
@@ -516,7 +696,7 @@
 
     <div class="tools">
 
-      <article class="tool">
+      <article class="tool tool--design">
         <h3>Specification <span>→</span> Test cases</h3>
         <p>Reads the requirement document behind a task, builds a numbered requirement inventory,
           then applies ISTQB design techniques — equivalence partitioning, boundary values, decision
@@ -524,34 +704,34 @@
           creates the folder, imports every case, links each one back to its task and assigns the
           owner from the task's assignee.</p>
         <div class="meta">
-          <div class="meta-row"><span class="lbl">Outputs</span><span class="val">Import file · review workbook · RTM</span></div>
-          <div class="meta-row"><span class="lbl">Reads</span><span class="val">Task tracker · knowledge base · test management</span></div>
+          <div class="meta-row"><span class="lbl">Outputs</span><span class="val">Import File · Review Workbook · RTM</span></div>
+          <div class="meta-row"><span class="lbl">Reads</span><span class="val">Task Tracker · Knowledge Base · Test Management</span></div>
           <div class="meta-row"><span class="lbl">Guard</span><span class="val"><span class="tag">Writes only on approval</span></span></div>
         </div>
       </article>
 
-      <article class="tool">
+      <article class="tool tool--build">
         <h3>Test cases <span>→</span> Automation</h3>
         <p>Turns approved manual cases into Playwright and TypeScript: groups them by screen, plans
           the Page Objects, resolves real selectors from the frontend source or a recorded codegen
           session rather than inventing them, and emits page classes plus spec files wired to Allure
           reporting.</p>
         <div class="meta">
-          <div class="meta-row"><span class="lbl">Outputs</span><span class="val">Page Object classes · tagged spec files · Allure integration</span></div>
+          <div class="meta-row"><span class="lbl">Outputs</span><span class="val">Page Object Classes · Tagged Spec Files · Allure Integration</span></div>
           <div class="meta-row"><span class="lbl">Stack</span><span class="val">Playwright · TypeScript · Page Object Model</span></div>
           <div class="meta-row"><span class="lbl">Gate</span><span class="val"><span class="tag">Type-check clean · spec count = case count</span></span></div>
         </div>
       </article>
 
-      <article class="tool">
+      <article class="tool tool--defect">
         <h3>Failures <span>→</span> Defects</h3>
         <p>Reads execution results and, for failed cases only, opens a defect under the parent task:
           routed to the responsible frontend or backend developer, carrying a recorded browser
           session as evidence, and linked both to the exact specification section and back to the
           case that failed.</p>
         <div class="meta">
-          <div class="meta-row"><span class="lbl">Outputs</span><span class="val">Assigned defect with evidence, specification anchor and case link</span></div>
-          <div class="meta-row"><span class="lbl">Evidence</span><span class="val">Recorded session — video plus network, console and error logs</span></div>
+          <div class="meta-row"><span class="lbl">Outputs</span><span class="val">Assigned Defect · Evidence · Specification Anchor · Case Link</span></div>
+          <div class="meta-row"><span class="lbl">Evidence</span><span class="val">Recorded Session — Video, Network, Console and Error Logs</span></div>
           <div class="meta-row"><span class="lbl">Rule</span><span class="val"><span class="tag warn">Evidence environment overrides the case</span></span></div>
         </div>
       </article>
@@ -659,7 +839,7 @@
   <hr class="rule">
 
   <!-- ============ EXPERIENCE ============ -->
-  <section>
+  <section id="experience">
     <div class="sec-head">
       <span class="eyebrow">Track record</span>
       <h2>Experience</h2>
@@ -675,6 +855,17 @@
             versioned internal plugins under protected-branch and code-owner approval governance.
             Extended UI regression into Playwright and TypeScript alongside the existing Java suite,
             defined test plans and strategy, and mentored engineers on automation and code review.</p>
+          <p>The subject matter is the records-management side of a state tax platform:
+            electronic documents routed between authorities, multi-step approval and signing chains,
+            case folders followed from request through status changes to closure, and classification
+            reference data carrying a full operation history. Recent work has centred on an
+            integration with an external document-management system, including the AI-assisted
+            routing suggestion inside it and the reasoning captured when a reviewer overrides it.</p>
+          <ul class="role-stack">
+            <li>LLM agents</li><li>Model Context Protocol</li><li>Playwright</li><li>TypeScript</li>
+            <li>Node.js</li><li>Zephyr Scale DC</li><li>Jira REST</li><li>Confluence REST</li>
+            <li>GitLab CI/CD</li><li>Allure</li><li>Java</li><li>Selenium</li>
+          </ul>
         </div>
       </div>
       <div class="role-item">
@@ -682,8 +873,17 @@
         <div class="role-what">
           <h3>Middle Software AQA Engineer</h3>
           <div class="co">Cybernet LLC</div>
-          <p>Developed the UI automation framework on Selenium, Java, Cucumber and JUnit, and wired
-            it into GitLab CI/CD for continuous execution with Allure reporting distributed daily.</p>
+          <p>Tested the document registration and approval flows — incoming, outgoing
+            and internal documents, visa chains, postal dispatch and return, and parallel approval
+            with external bodies — plus the online cash-register reporting system: report form
+            definitions and cash-operation summaries at taxpayer and premises level. Developed the UI
+            automation framework on Selenium, Java, Cucumber and JUnit, wired it into GitLab CI/CD
+            with Allure reporting distributed daily, and linked every automated test back to the
+            manual case it came from.</p>
+          <ul class="role-stack">
+            <li>Java</li><li>Selenium WebDriver</li><li>Cucumber</li><li>JUnit</li>
+            <li>GitLab CI/CD</li><li>Allure</li><li>Jira</li><li>Confluence</li><li>Zephyr Scale</li>
+          </ul>
         </div>
       </div>
       <div class="role-item">
@@ -691,8 +891,15 @@
         <div class="role-what">
           <h3>Middle Software AQA Engineer</h3>
           <div class="co">Rainpark Solutions</div>
-          <p>Built a BDD framework from scratch with the Page Object Model for scalable UI
-            automation, and covered the backend with REST Assured and Postman.</p>
+          <p>Owned quality on a hospital information system: doctor, patient and staff records,
+            online and walk-in queueing, appointments, payments, routing between departments and
+            the flows around them. Wrote and ran the manual cases behind those flows, then automated them — a BDD framework
+            built from scratch on the Page Object Model, UI and backend suites in Java and Selenium,
+            and REST API coverage with Postman and REST Assured using JSON deserialization.</p>
+          <ul class="role-stack">
+            <li>Java</li><li>Selenium WebDriver</li><li>Cucumber (BDD)</li><li>JUnit</li>
+            <li>Page Object Model</li><li>REST Assured</li><li>Postman</li><li>Jira</li>
+          </ul>
         </div>
       </div>
     </div>
@@ -727,9 +934,42 @@
     </div>
   </section>
 
+  <hr class="rule">
+
+  <!-- ============ LANGUAGES ============ -->
+  <section id="languages">
+    <div class="sec-head">
+      <h2>Languages</h2>
+    </div>
+
+    <div class="langs">
+      <div class="lang" tabindex="0">
+        <span class="lang-name">Azerbaijani</span>
+        <span class="meter" role="img" aria-label="Azerbaijani — native speaker">
+          <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i>
+        </span>
+        <span class="lang-level" aria-hidden="true">Native</span>
+      </div>
+      <div class="lang" tabindex="0">
+        <span class="lang-name">English</span>
+        <span class="meter" role="img" aria-label="English — intermediate">
+          <i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i>
+        </span>
+        <span class="lang-level" aria-hidden="true">Intermediate</span>
+      </div>
+      <div class="lang" tabindex="0">
+        <span class="lang-name">Russian</span>
+        <span class="meter" role="img" aria-label="Russian — intermediate">
+          <i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i>
+        </span>
+        <span class="lang-level" aria-hidden="true">Intermediate</span>
+      </div>
+    </div>
+  </section>
+
 </div>
 
-<footer>
+<footer id="contact">
   <div class="wrap">
     <h2>Open to conversations</h2>
     <p>About test automation, AI-assisted quality engineering, or building QA tooling a whole team
@@ -737,16 +977,46 @@
     <details class="dropdown">
       <summary>Contact<span class="chev" aria-hidden="true"></span></summary>
       <ul class="menu">
-        <li><a href="mailto:khayyam.a.a@gmail.com">E-mail</a></li>
-        <li><a href="tel:+994502541077">Phone</a></li>
-        <li><a href="https://wa.me/905518126881" target="_blank" rel="noopener">WhatsApp</a></li>
-        <li><a href="https://linkedin.com/in/khayyamalmas" target="_blank" rel="noopener">LinkedIn</a></li>
-        <li><a href="https://github.com/khayyamalmas" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a class="iconbtn tip" href="mailto:khayyam.a.a@gmail.com" data-tip="E-mail" aria-label="E-mail">
+          <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor"
+               stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="22 6.5 12 13.5 2 6.5"/></svg>
+        </a></li>
+        <li><a class="iconbtn tip" href="tel:+994502541077" data-tip="Phone" aria-label="Phone">
+          <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor"
+               stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
+        </a></li>
+        <li><a class="iconbtn tip" href="https://wa.me/905518126881" target="_blank" rel="noopener"
+               data-tip="WhatsApp" aria-label="WhatsApp">
+          <svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.2-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.4.2-.6.1-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.1-.3 0-.5.1-.6l.5-.5.3-.5c.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4s-1 1-1 2.5 1 2.9 1.2 3.1c.1.2 2.1 3.2 5 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4l-.6-.4M12 21.8a9.9 9.9 0 0 1-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4A9.9 9.9 0 0 1 2.1 12 9.9 9.9 0 0 1 12 2.1c2.6 0 5.1 1 7 2.9a9.8 9.8 0 0 1 2.9 7c0 5.4-4.4 9.8-9.9 9.8m8.4-18.3A11.8 11.8 0 0 0 12 0C5.5 0 .2 5.3.2 11.9c0 2.1.5 4.1 1.6 5.9L.1 24l6.3-1.7c1.7 1 3.7 1.4 5.7 1.4 6.5 0 11.9-5.3 11.9-11.9 0-3.2-1.2-6.2-3.5-8.4z"/></svg>
+        </a></li>
+        <li><a class="iconbtn tip" href="https://linkedin.com/in/khayyamalmas" target="_blank" rel="noopener"
+               data-tip="LinkedIn" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor" aria-hidden="true"><path d="M20.4 20.5h-3.6V15c0-1.4 0-3.1-1.9-3.1s-2.1 1.4-2.1 2.9v5.7H9.4V9h3.4v1.6h.1c.5-.9 1.6-1.9 3.4-1.9 3.6 0 4.3 2.4 4.3 5.5v6.3zM5.3 7.4a2.1 2.1 0 1 1 0-4.1 2.1 2.1 0 0 1 0 4.1zm1.8 13.1H3.6V9h3.5v11.5zM22.2 0H1.8C.8 0 0 .8 0 1.7v20.6C0 23.2.8 24 1.8 24h20.4c1 0 1.8-.8 1.8-1.7V1.7C24 .8 23.2 0 22.2 0z"/></svg>
+        </a></li>
+        <li><a class="iconbtn tip" href="https://github.com/khayyamalmas" target="_blank" rel="noopener"
+               data-tip="GitHub" aria-label="GitHub">
+          <svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.2 5.1 18.2 5.4 18.2 5.4c.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg>
+        </a></li>
       </ul>
     </details>
-    <div class="foot-note">English · Russian</div>
   </div>
 </footer>
+
+<script>
+  (function(){
+    var root = document.documentElement;
+    var btn  = document.getElementById('theme-toggle');
+    if (!btn) return;
+    btn.addEventListener('click', function(){
+      var set = root.getAttribute('data-theme');
+      var dark = set ? set === 'dark'
+                     : window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var next = dark ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      try{ localStorage.setItem('theme', next); }catch(e){}
+    });
+  })();
+</script>
 
 </body>
 </html>
